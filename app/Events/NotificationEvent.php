@@ -13,13 +13,15 @@ use Illuminate\Queue\SerializesModels;
 class NotificationEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    protected $name;
+    protected $message;
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->name = $data['name'];
+        $this->message = $data['message'];
     }
 
     /**
@@ -42,7 +44,8 @@ class NotificationEvent implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return [
-            'message' => 'Hello World',
+            'name' => $this->name,
+            'message' => $this->message,
         ];
     }
 }
