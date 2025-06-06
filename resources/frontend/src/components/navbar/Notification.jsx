@@ -2,18 +2,7 @@ import React, { useEffect } from 'react'
 import Pusher from 'pusher-js'
 
 const Notification = () => {
-    useEffect(() => {
-        const pusher = new Pusher('91b803b8e71da41d445b', {
-            cluster: 'ap2'
-        })
-
-        const channel = pusher.subscribe('real-time-app')
-        console.log(pusher.connection)
-
-        channel.bind('notification.send', function (data) {
-            console.log(data)
-        })
-    }, [])
+   
 
     return (
         <div>

@@ -1,11 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import NotificationIcons from '../../assets/icons/notification.png'
 import Notification from './Notification'
+import Pusher from 'pusher-js'
 
 const Navbar = () => {
+    const [notification, setNotification] = useState('')
+
+    useEffect(() => {
+        const pusher = new Pusher('91b803b8e71da41d445b', {
+            cluster: 'ap2'
+        })
+
+        const channel = pusher.subscribe('real-time-app')
+        console.log(pusher.connection)
+
+        channel.bind('notification.send', function (data) {
+            console.log(data)
+        })
+    }, [])
+
     return (
         <>
-            ;
             <div>
                 <nav className='bg-white border-gray-200 dark:bg-gray-900'>
                     <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4'>
