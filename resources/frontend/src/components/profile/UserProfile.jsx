@@ -4,8 +4,7 @@ import axios from 'axios'
 const UserProfile = () => {
     const sendNotification = async () => {
         await axios.post('http://127.0.0.1:8000/api/send-notification', {
-            name: 'Nadun',
-            message: 'Hello'
+            message: 'Hello, machsan'
         })
     }
     return (

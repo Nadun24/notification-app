@@ -20,7 +20,7 @@ class NotificationEvent implements ShouldBroadcast
      */
     public function __construct($data)
     {
-        $this->name = $data['name'];
+        $this->name = $data['name'] ?? 'Default Name';
         $this->message = $data['message'];
     }
 
