@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import NotificationIcons from '../../assets/icons/notification.png'
 import Notification from './Notification'
 import Pusher from 'pusher-js'
+import { useState } from 'react'
 
 const Navbar = () => {
-    const [notification, setNotification] = useState('')
+    const [message, setMessage] = useState('')
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
         const pusher = new Pusher('91b803b8e71da41d445b', {
@@ -15,9 +17,13 @@ const Navbar = () => {
         console.log(pusher.connection)
 
         channel.bind('notification.send', function (data) {
-            console.log(data)
+            const { message } = data
+            setMessage(message)
+            setCount(prevCount => prevCount + 1)
         })
     }, [])
+
+    console.log('Message from Pusher:', message)
 
     return (
         <>
@@ -53,7 +59,13 @@ const Navbar = () => {
                                     alt='user photo'
                                 />
                             </button>
-                            <Notification />
+                            <Notification message={message} />
+                            {message ? (
+                                <p className='bg-red-600 text-white w-6 h-6 pl-2 pb-1 rounded-full'>
+                                    {count}
+                                </p>
+                            ) : null}
+
                             <button
                                 data-collapse-toggle='navbar-user'
                                 type='button'

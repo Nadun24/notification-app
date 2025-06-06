@@ -1,9 +1,5 @@
-import React, { useEffect } from 'react'
-import Pusher from 'pusher-js'
-
-const Notification = () => {
-   
-
+import PropType from 'prop-types'
+const Notification = ({ message }) => {
     return (
         <div>
             <div
@@ -12,15 +8,16 @@ const Notification = () => {
             >
                 <div className='px-4 py-3'>
                     <span className='block text-sm text-gray-900 dark:text-white'>
-                        Bonnie Green
-                    </span>
-                    <span className='block text-sm text-gray-500 truncate dark:text-gray-400'>
-                        name@flowbite.com
+                        {message}
                     </span>
                 </div>
             </div>
         </div>
     )
+}
+
+Notification.propTypes = {
+    message: PropType.string.isRequired
 }
 
 export default Notification
